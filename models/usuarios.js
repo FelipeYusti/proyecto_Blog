@@ -2,38 +2,22 @@
 const { Schema, model } = require("mongoose");
 const userSchema = new Schema(
   {
-    nombre: {
+    userName: {
       type: String,
-      required: true,
+      required: true
     },
     email: {
       type: String,
-      required: true,
+      required: true
     },
     passwordHash: {
       type: String,
-      required: true,
-    },
-    telefono: {
-      type: String,
-      required: true,
-    },
-    esAdmin: {
-      type: Boolean,
-      default: false,
-    },
-    imagen: {
-      type: String,
-      default: "",
-    },
-    ciudad: {
-      type: String,
-      default: "",
+      required: true
     },
     pais: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   { collection: "user" }
 );
