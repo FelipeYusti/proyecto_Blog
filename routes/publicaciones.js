@@ -3,11 +3,10 @@
 const express = require("express");
 const router = express.Router();
 
+//Instanciamos el controlador correspondiente
+const publicacionesController = require("../controllers/publicaciones.js");
 
-//Instanciamos el controlador correspondiente 
-const publicacionesController = require("../controllers/publicaciones");
-
-//rutas que entrega la API 
+//rutas que entrega la API
 
 router.get("/publicaciones/listarTodo", publicacionesController.listarTodo);
 router.get("/publicaciones/listarPorIdComentario", publicacionesController.listarPorIdComentario);
@@ -17,4 +16,4 @@ router.delete("/publicaciones/borrarPorId", publicacionesController.borrarPorId)
 
 //....
 
-module.exports = router; 
+module.exports = router;

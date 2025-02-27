@@ -47,6 +47,7 @@ const nuevaPublicacion = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
     titulo: req.body.titulo,
+    rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
     fecha_publicacion: req.body.fecha_publicacion
   };
@@ -80,6 +81,7 @@ const actualizarPorId = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
     titulo: req.body.titulo,
+    rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
     fecha_publicacion: req.body.fecha_publicacion
   };

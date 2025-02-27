@@ -48,7 +48,8 @@ const loginUser = async (req, res) => {
   if (bcrypt.compareSync(req.body.password, userExist.passwordHash)) {
     return res.status(200).send({
       estado: true,
-      mensaje: "Inicio de sesion Correctamente."
+      mensaje: "Inicio de sesion Correctamente.",
+      user: userExist.userName
     });
   } else {
     return res.status(400).send({
