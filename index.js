@@ -10,9 +10,14 @@ const cnn = require("./models/bd_conexion.js");
 cnn();
 
 // rutas globales de la app
-const rutaUser = require("./routes/usuarios.js");
+const rutUser = require("./controllers/usuarios.js");
+const rutcomments = require("./controllers/cometarios.js");
+const rutPost = require("./controllers/publicaciones.js");
 
-app.use("/API", rutaUser);
+app.use("api/", rutUser);
+app.use("api/", rutPost);
+app.use("api/", rutcomments);
+
 app.listen(4000, () => {
   console.log(`escuchando en el puerto: ${4000}`);
 });
