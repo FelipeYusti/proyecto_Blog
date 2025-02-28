@@ -3,11 +3,10 @@
 const express = require("express");
 const router = express.Router();
 
+//Instanciamos el controlador correspondiente
+const cometariosController = require("../controllers/comentarios.js");
 
-//Instanciamos el controlador correspondiente 
-const cometariosController = require("../controllers/comentarios");
-
-//rutas que entrega la API 
+//rutas que entrega la API
 
 router.get("/comentarios/listarPorId", cometariosController.listarPorIdPost);
 router.post("/comentarios/nuevoComentario", cometariosController.nuevoComentario);
@@ -16,4 +15,4 @@ router.delete("/comentarios/borrarPorId", cometariosController.borrarPorId);
 
 //....
 
-module.exports = router; 
+module.exports = router;
