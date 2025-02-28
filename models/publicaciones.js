@@ -2,15 +2,19 @@ const { Schema, model } = require("mongoose");
 const publicacionesSchema = new Schema(
   {
     autor_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     titulo: {
-      type: Number,
+      type: String,
+      required: true,
+    },
+    sub_titulo: {
+      type: String,
       required: true,
     },
     contenido_publicacion: {
-      type: Number,
+      type: String,
       required: true,
     },
     rutImagen: {
@@ -18,7 +22,11 @@ const publicacionesSchema = new Schema(
       default: "",
     },
     fecha_publicacion: {
-      type: Date,
+      type: String,
+      required: true,
+    },
+    categoria: {
+      type: String,
       required: true,
     },
   },

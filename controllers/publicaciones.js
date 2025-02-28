@@ -11,15 +11,15 @@ const listarTodo = async (req, res) => {
   try {
     //Consultar todos sin filtro
 
-    let listarComentarios = await comentarios.find().exec();
+    let listarPublicaciones = await publicaciones.find().exec();
     res.status(200).send({
       exito: true,
-      listarComentarios
+      listarPublicaciones,
     });
   } catch (error) {
     res.status(500).send({
       exito: false,
-      mensaje: "Error en la consulta"
+      mensaje: "Error en la consulta",
     });
   }
 };
@@ -33,12 +33,12 @@ const listarPorIdComentario = async (req, res) => {
     let listarComentarios = await comentarios.find(id).exec();
     res.status(200).send({
       exito: true,
-      listarComentarios
+      listarComentarios,
     });
   } catch (error) {
     res.status(500).send({
       exito: false,
-      mensaje: "Error en la consulta"
+      mensaje: "Error en la consulta",
     });
   }
 };
@@ -47,9 +47,11 @@ const nuevaPublicacion = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
     titulo: req.body.titulo,
+    sub_titulo: req.body.sub_titulo,
     rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
-    fecha_publicacion: req.body.fecha_publicacion
+    fecha_publicacion: req.body.fecha_publicacion,
+    categoria: req.body.categoria,
   };
 
   try {
@@ -62,12 +64,12 @@ const nuevaPublicacion = async (req, res) => {
 
     return res.send({
       estado: true,
-      mensaje: `Insercion exitosa`
+      mensaje: `Insercion exitosa`,
     });
   } catch (error) {
     return res.send({
       estado: false,
-      mensaje: `A ocurrido un error en la consulta ${error}`
+      mensaje: `A ocurrido un error en la consulta ${error}`,
     });
   }
 };
@@ -83,7 +85,7 @@ const actualizarPorId = async (req, res) => {
     titulo: req.body.titulo,
     rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
-    fecha_publicacion: req.body.fecha_publicacion
+    fecha_publicacion: req.body.fecha_publicacion,
   };
 
   try {
@@ -91,13 +93,13 @@ const actualizarPorId = async (req, res) => {
     return res.send({
       estado: true,
       mensaje: `Actualizacion exitosa`,
-      consulta: consulta
+      consulta: consulta,
     });
   } catch (error) {
     return res.send({
       estado: true,
       mensaje: `Error al actualizar`,
-      consulta: consulta
+      consulta: consulta,
     });
   }
 };
@@ -111,12 +113,12 @@ const borrarPorId = async (req, res) => {
     return res.send({
       estado: true,
       mensaje: `Se eliminó correctamente`,
-      consulta: consulta
+      consulta: consulta,
     });
   } catch (error) {
     return res.send({
       estado: false,
-      mensaje: `Error, no se elimino`
+      mensaje: `Error, no se elimino`,
     });
   }
 };
@@ -126,5 +128,5 @@ module.exports = {
   nuevaPublicacion,
   listarTodo,
   actualizarPorId,
-  borrarPorId
+  borrarPorId,
 };
