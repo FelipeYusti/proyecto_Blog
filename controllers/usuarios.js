@@ -44,8 +44,20 @@ const loginUser = async (req, res) => {
       mensaje: "No existe el usuario",
     });
   }
+
+  const token = jwt.sign(
+    // datos a codificar en le toke
+    {
+      userId: userExist.id,
+      userName: userExist.userName,
+    },
+    // Salt de la codificacion o hashing
+    "seCreTo",
+    // vida util
+    { expiresIn: "4h" }
+  );
   // seleccionamos los datos que necesitamos en el front : id y nombre de usuario
-  dataUser = { user_id: userExist.id, user: userExist.userName };
+  dataUser = { user_id: userExist.id, user: userExist.userName, toke: token };
 
   if (bcrypt.compareSync(req.body.password, userExist.passwordHash)) {
     return res.status(200).send({
