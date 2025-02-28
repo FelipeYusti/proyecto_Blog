@@ -1,23 +1,23 @@
-const { Schema, model, Collection } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const cometariosSchema = Schema(
+const cometariosSchema = new Schema(
   {
     post_id: {
-      type: int,
-      required: true
+      type: Number,
+      required: true,
     },
     usuario_id: {
-      type: int,
-      required: true
+      type: Number,
+      required: true,
     },
     contenido_comentario: {
       type: String,
-      required: true
+      required: true,
     },
     fecha_comentario: {
       type: Date,
-      required: true
-    }
+      required: true,
+    },
   },
 
   { collection: "comentarios" }

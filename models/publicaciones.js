@@ -1,30 +1,28 @@
-const { Schema, model, Collection } = require("mongoose");
-
-const publicacionesSchema = Schema(
+const { Schema, model } = require("mongoose");
+const publicacionesSchema = new Schema(
   {
     autor_id: {
-      type: int,
-      required: true
+      type: Number,
+      required: true,
     },
     titulo: {
-      type: int,
-      required: true
+      type: Number,
+      required: true,
     },
     contenido_publicacion: {
-      type: int,
-      required: true
+      type: Number,
+      required: true,
     },
     rutImagen: {
       type: String,
-      default: ""
+      default: "",
     },
     fecha_publicacion: {
       type: Date,
-      required: true
-    }
+      required: true,
+    },
   },
-
-  { collection: "publicacione" }
+  { collection: "post" }
 );
 
-module.exports = model("Publicaciones", cometariosSchema);
+module.exports = model("post", publicacionesSchema);
