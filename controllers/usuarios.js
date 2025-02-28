@@ -8,7 +8,7 @@ const insertUser = async (req, res) => {
     userName: req.body.userName,
     email: req.body.email,
     passwordHash: bcrypt.hashSync(req.body.password, 10),
-    pais: req.body.pais
+    pais: req.body.pais,
   };
 
   const usuarioExiste = await User.findOne({ userName: data.userName });
@@ -16,7 +16,7 @@ const insertUser = async (req, res) => {
   if (usuarioExiste) {
     return res.status(400).send({
       estado: false,
-      mensaje: "El usuario ya está registrado en el Sistema."
+      mensaje: "El usuario ya está registrado en el Sistema.",
     });
   }
 
@@ -25,12 +25,12 @@ const insertUser = async (req, res) => {
     await registerUser.save();
     return res.status(200).send({
       estado: true,
-      mensaje: "Usuario registrado correctamente"
+      mensaje: "Usuario registrado correctamente",
     });
   } catch (error) {
     return res.status(400).send({
       estado: false,
-      mensaje: `error: ${error}`
+      mensaje: `error: ${error}`,
     });
   }
 };
@@ -41,20 +41,22 @@ const loginUser = async (req, res) => {
   if (!userExist) {
     return res.status(500).send({
       estado: false,
-      mensaje: "No existe el usuario"
+      mensaje: "No existe el usuario",
     });
   }
+  // seleccionamos los datos que necesitamos en el front : id y nombre de usuario
+  dataUser = { user_id: userExist.id, user: userExist.userName };
 
   if (bcrypt.compareSync(req.body.password, userExist.passwordHash)) {
     return res.status(200).send({
       estado: true,
       mensaje: "Inicio de sesion Correctamente.",
-      user: userExist.userName
+      infoUser: dataUser,
     });
   } else {
     return res.status(400).send({
       estado: false,
-      mensaje: "Contraseña Incorrecta, Intente de Nuevo."
+      mensaje: "Contraseña Incorrecta, Intente de Nuevo.",
     });
   }
 };
@@ -65,5 +67,5 @@ const updatePass = async (req, res) => {
 module.exports = {
   insertUser,
   updatePass,
-  loginUser
+  loginUser,
 };
