@@ -42,6 +42,27 @@ const listarPorIdComentario = async (req, res) => {
     });
   }
 };
+const listarPorCategoria = async (req, res) => {
+
+  let categoria = req.params.categoria;
+
+  try {
+
+    let listarPublicaciones = await publicaciones.find({ categoria: categoria }).exec();
+
+
+    res.status(200).send({
+      exito: true,
+      listarPublicaciones,
+    });
+  } catch (error) {
+
+    res.status(500).send({
+      exito: false,
+      mensaje: "Error en la consulta",
+    });
+  }
+};
 
 
 const nuevaPublicacion = async (req, res) => {
@@ -127,5 +148,6 @@ module.exports = {
   nuevaPublicacion,
   listarTodo,
   actualizarPorId,
-  borrarPorId
+  borrarPorId,
+  listarPorCategoria
 };
