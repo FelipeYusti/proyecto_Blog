@@ -32,5 +32,4 @@ const publicacionesSchema = new Schema(
   },
   { collection: "post" }
 );
-
 module.exports = model("post", publicacionesSchema);

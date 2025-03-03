@@ -33,33 +33,12 @@ const listarPorIdComentario = async (req, res) => {
     let listarPublicaciones = await publicaciones.find(id).exec();
     res.status(200).send({
       exito: true,
-      listarPublicaciones,
+      listarComentarios
     });
   } catch (error) {
     res.status(500).send({
       exito: false,
-      mensaje: "Error en la consulta",
-    });
-  }
-};
-//Listar por categoria
-
-const listarPorCategoria = async (req, res) => {
-
-  let categoria = req.params.categoria;
-
-  try {
-    let listarPublicaciones = await publicaciones.find({ categoria: categoria }).exec();
-
-    res.status(200).send({
-      exito: true,
-      listarPublicaciones,
-    });
-  } catch (error) {
-
-    res.status(500).send({
-      exito: false,
-      mensaje: "Error en la consulta",
+      mensaje: "Error en la consulta"
     });
   }
 };
@@ -69,10 +48,9 @@ const nuevaPublicacion = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
     titulo: req.body.titulo,
-    rutImagen: req.body.rutImagen,
-    categoria: req.body.categoria,
+    rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
-    fecha_publicacion: req.body.fecha_publicacion,
+    fecha_publicacion: req.body.fecha_publicacion
   };
 
   try {
@@ -149,6 +127,5 @@ module.exports = {
   nuevaPublicacion,
   listarTodo,
   actualizarPorId,
-  borrarPorId,
-  listarPorCategoria
+  borrarPorId
 };

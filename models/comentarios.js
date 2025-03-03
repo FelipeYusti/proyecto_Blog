@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Collection } = require("mongoose");
 
-const cometariosSchema = new Schema(
+const cometariosSchema = Schema(
   {
     post_id: {
       type: Number,
