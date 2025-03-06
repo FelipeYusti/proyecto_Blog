@@ -3,11 +3,11 @@ const { Schema, model } = require("mongoose");
 const cometariosSchema = new Schema(
   {
     post_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     usuario_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     contenido_comentario: {
@@ -15,7 +15,7 @@ const cometariosSchema = new Schema(
       required: true,
     },
     fecha_comentario: {
-      type: Date,
+      type: String,
       required: true,
     },
   },

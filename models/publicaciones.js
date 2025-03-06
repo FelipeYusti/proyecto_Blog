@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const publicacionesSchema = new Schema(
   {
+    
     autor_id: {
       type: String,
       required: true,

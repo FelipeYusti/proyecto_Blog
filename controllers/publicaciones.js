@@ -24,16 +24,15 @@ const listarTodo = async (req, res) => {
   }
 };
 
-const listarPorIdComentario = async (req, res) => {
+const listarPorIdUserPublicacion = async (req, res) => {
   let id = req.params.id;
 
   try {
     //Consultar todos sin filtro
-
-    let listarPublicaciones = await publicaciones.find(id).exec();
+    let listarPublicaciones = await publicaciones.find({ autor_id: id }).exec();
     res.status(200).send({
       exito: true,
-      listarPublicaciones,
+      post: listarPublicaciones,
     });
   } catch (error) {
     res.status(500).send({
@@ -42,7 +41,23 @@ const listarPorIdComentario = async (req, res) => {
     });
   }
 };
+const traerPublicId = async (req, res) => {
+  let id = req.params.id;
 
+  try {
+    //Consultar todos sin filtro
+    let listarPublicaciones = await publicaciones.findById(id).exec();
+    res.status(200).send({
+      exito: true,
+      post: listarPublicaciones,
+    });
+  } catch (error) {
+    res.status(500).send({
+      exito: false,
+      mensaje: "Error en la consulta",
+    });
+  }
+};
 const nuevaPublicacion = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
@@ -80,12 +95,11 @@ const actualizarPorId = async (req, res) => {
 
   //Payload que viene en el body :: los datos que manda el formulario
   let datos = {
-    autor_id: req.body.autor_id,
     titulo: req.body.titulo,
-    rutImagen: req.body.imagen,
+    sub_titulo: req.body.sub_titulo,
+    /* rutImagen: req.body.imagen, */
     categoria: req.body.categoria,
     contenido_publicacion: req.body.contenido_publicacion,
-    fecha_publicacion: req.body.fecha_publicacion,
   };
 
   try {
@@ -97,9 +111,9 @@ const actualizarPorId = async (req, res) => {
     });
   } catch (error) {
     return res.send({
-      estado: true,
+      estado: false,
       mensaje: `Error al actualizar`,
-      consulta: consulta,
+      error: error,
     });
   }
 };
@@ -123,7 +137,8 @@ const borrarPorId = async (req, res) => {
 };
 
 module.exports = {
-  listarPorIdComentario,
+  listarPorIdUserPublicacion,
+  traerPublicId,
   nuevaPublicacion,
   listarTodo,
   actualizarPorId,
