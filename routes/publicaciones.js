@@ -9,11 +9,32 @@ const publicacionesController = require("../controllers/publicaciones.js");
 //rutas que entrega la API
 
 router.get("/publicaciones/listarTodo", publicacionesController.listarTodo);
-router.get("/publicaciones/listarPorIdComentario", publicacionesController.listarPorIdComentario);
-router.get("/publicaciones/listarPorCategoria/:categoria", publicacionesController.listarPorCategoria);
-router.post("/publicaciones/nuevaPublicacion", publicacionesController.nuevaPublicacion);
-router.put("/publicaciones/actualizarPorId", publicacionesController.listarTodo);
-router.delete("/publicaciones/borrarPorId", publicacionesController.borrarPorId);
+
+router.get(
+  "/publicaciones/obtenerComentarios/:id",
+  publicacionesController.obtenerComentariosPorPublicacion
+);
+
+router.get(
+  "/publicaciones/listarPorIdComentario",
+  publicacionesController.listarPorIdComentario
+);
+router.get(
+  "/publicaciones/listarPorCategoria/:categoria",
+  publicacionesController.listarPorCategoria
+);
+router.post(
+  "/publicaciones/nuevaPublicacion",
+  publicacionesController.nuevaPublicacion
+);
+router.put(
+  "/publicaciones/actualizarPorId",
+  publicacionesController.listarTodo
+);
+router.delete(
+  "/publicaciones/borrarPorId/:id",
+  publicacionesController.borrarPorId
+);
 
 //....
 

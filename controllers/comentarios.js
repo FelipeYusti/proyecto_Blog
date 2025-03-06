@@ -14,12 +14,12 @@ const listarPorIdPost = async (req, res) => {
     let listarComentarios = await comentarios.find(id).exec();
     res.status(200).send({
       exito: true,
-      listarComentarios
+      listarComentarios,
     });
   } catch (error) {
     res.status(500).send({
       exito: false,
-      mensaje: "Error en la consulta"
+      mensaje: "Error en la consulta",
     });
   }
 };
@@ -29,7 +29,7 @@ const nuevoComentario = async (req, res) => {
     post_id: req.body.post_id,
     usuario_id: req.body.usuario_id,
     contenido_comentario: req.body.contenido_comentario,
-    fecha_comentario: req.body.fecha_comentario
+    fecha_comentario: req.body.fecha_comentario,
   };
 
   try {
@@ -42,12 +42,12 @@ const nuevoComentario = async (req, res) => {
 
     return res.send({
       estado: true,
-      mensaje: `Insercion exitosa`
+      mensaje: `Insercion exitosa`,
     });
   } catch (error) {
     return res.send({
       estado: false,
-      mensaje: `A ocurrido un error en la consulta ${error}`
+      mensaje: `A ocurrido un error en la consulta ${error}`,
     });
   }
 };
@@ -62,7 +62,7 @@ const actualizarPorId = async (req, res) => {
     post_id: req.body.post_id,
     usuario_id: req.body.usuario_id,
     contenido_comentario: req.body.contenido_comentario,
-    fecha_comentario: req.body.fecha_comentario
+    fecha_comentario: req.body.fecha_comentario,
   };
 
   try {
@@ -70,13 +70,13 @@ const actualizarPorId = async (req, res) => {
     return res.send({
       estado: true,
       mensaje: `Actualizacion exitosa`,
-      consulta: consulta
+      consulta: consulta,
     });
   } catch (error) {
     return res.send({
       estado: true,
       mensaje: `Error al actualizar`,
-      consulta: consulta
+      consulta: consulta,
     });
   }
 };
@@ -90,14 +90,19 @@ const borrarPorId = async (req, res) => {
     return res.send({
       estado: true,
       mensaje: `Se eliminó correctamente`,
-      consulta: consulta
+      consulta: consulta,
     });
   } catch (error) {
     return res.send({
       estado: false,
-      mensaje: `Error, no se elimino`
+      mensaje: `Error, no se elimino`,
     });
   }
 };
 
-module.exports = { listarPorIdPost, nuevoComentario, actualizarPorId, borrarPorId };
+module.exports = {
+  listarPorIdPost,
+  nuevoComentario,
+  actualizarPorId,
+  borrarPorId,
+};

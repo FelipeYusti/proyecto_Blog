@@ -1,5 +1,6 @@
 const publicaciones = require("../models/publicaciones");
 let Publicaciones = require("../models/publicaciones");
+const Comentarios = require("../models/comentarios");
 let jwt = require("jsonwebtoken");
 
 //let bcrytp = require('bcryptjs');
@@ -33,30 +34,9 @@ const listarPorIdComentario = async (req, res) => {
     let listarPublicaciones = await publicaciones.find(id).exec();
     res.status(200).send({
       exito: true,
-      listarComentarios
+      listarComentarios,
     });
   } catch (error) {
-    res.status(500).send({
-      exito: false,
-      mensaje: "Error en la consulta"
-    });
-  }
-};
-const listarPorCategoria = async (req, res) => {
-
-  let categoria = req.params.categoria;
-
-  try {
-
-    let listarPublicaciones = await publicaciones.find({ categoria: categoria }).exec();
-
-
-    res.status(200).send({
-      exito: true,
-      listarPublicaciones,
-    });
-  } catch (error) {
-
     res.status(500).send({
       exito: false,
       mensaje: "Error en la consulta",
@@ -64,14 +44,35 @@ const listarPorCategoria = async (req, res) => {
   }
 };
 
+const listarPorCategoria = async (req, res) => {
+  let categoria = req.params.categoria;
+
+  try {
+    let listarPublicaciones = await publicaciones
+      .find({ categoria: categoria })
+      .exec();
+
+    res.status(200).send({
+      exito: true,
+      listarPublicaciones,
+    });
+  } catch (error) {
+    res.status(500).send({
+      exito: false,
+      mensaje: "Error en la consulta",
+    });
+  }
+};
 
 const nuevaPublicacion = async (req, res) => {
   let datos = {
     autor_id: req.body.autor_id,
     titulo: req.body.titulo,
+    sub_titulo: req.body.sub_titulo,
     rutImagen: req.body.imagen,
     contenido_publicacion: req.body.contenido_publicacion,
-    fecha_publicacion: req.body.fecha_publicacion
+    fecha_publicacion: req.body.fecha_publicacion,
+    categoria: req.body.categoria,
   };
 
   try {
@@ -124,6 +125,7 @@ const actualizarPorId = async (req, res) => {
     });
   }
 };
+
 const borrarPorId = async (req, res) => {
   let id = req.params.id;
 
@@ -143,11 +145,38 @@ const borrarPorId = async (req, res) => {
   }
 };
 
+const obtenerComentariosPorPublicacion = async (req, res) => {
+  let id = req.params.id;
+
+  try {
+    const comentarios = await Comentarios.find({ post_id: id });
+
+    if (comentarios.length === 0) {
+      return res.status(404).send({
+        estado: false,
+        mensaje: "No se encontraron comentarios para esta publicación.",
+      });
+    }
+
+    return res.status(200).send({
+      estado: true,
+      mensaje: "Comentarios encontrados",
+      datos: comentarios,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      estado: false,
+      mensaje: `Ha ocurrido un error en la consulta: ${error.message}`,
+    });
+  }
+};
+
 module.exports = {
   listarPorIdComentario,
   nuevaPublicacion,
   listarTodo,
   actualizarPorId,
   borrarPorId,
-  listarPorCategoria
+  listarPorCategoria,
+  obtenerComentariosPorPublicacion,
 };

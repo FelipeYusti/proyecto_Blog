@@ -1,13 +1,13 @@
 const { Schema, model, Collection } = require("mongoose");
 
-const cometariosSchema = Schema(
+const comentariosSchema = Schema(
   {
     post_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     usuario_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     contenido_comentario: {
@@ -15,7 +15,7 @@ const cometariosSchema = Schema(
       required: true,
     },
     fecha_comentario: {
-      type: Date,
+      type: String,
       required: true,
     },
   },
@@ -23,4 +23,4 @@ const cometariosSchema = Schema(
   { collection: "comentarios" }
 );
 
-module.exports = model("comentarios", cometariosSchema);
+module.exports = model("comentarios", comentariosSchema);
