@@ -145,11 +145,25 @@ const borrarPorId = async (req, res) => {
   }
 };
 
+const obtenerComentarios = async (postId) => {
+  try {
+    const comentarios = await Comentario.find({ post_id: postId })
+      .populate("usuario_id", "userName") // Solo trae el campo userName
+      .exec();
+
+    console.log(comentarios);
+  } catch (error) {
+    console.error("Error obteniendo comentarios:", error);
+  }
+};
+
 const obtenerComentariosPorPublicacion = async (req, res) => {
   let id = req.params.id;
 
   try {
-    const comentarios = await Comentarios.find({ post_id: id });
+    const comentarios = await Comentarios.find({ post_id: id })
+      .populate("usuario_id", "userName") // Obtiene solo el nombre del usuario
+      .exec();
 
     if (comentarios.length === 0) {
       return res.status(404).send({

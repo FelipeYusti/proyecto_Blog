@@ -1,13 +1,14 @@
 const { Schema, model, Collection } = require("mongoose");
 
-const comentariosSchema = Schema(
+const comentariosSchema = new Schema(
   {
     post_id: {
       type: String,
       required: true,
     },
     usuario_id: {
-      type: String,
+      type: Schema.Types.ObjectId, // Cambiado para referenciar la colección 'user'
+      ref: "User",
       required: true,
     },
     contenido_comentario: {
@@ -19,7 +20,6 @@ const comentariosSchema = Schema(
       required: true,
     },
   },
-
   { collection: "comentarios" }
 );
 
